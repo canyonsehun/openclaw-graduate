@@ -4,11 +4,21 @@ Use these sources when behavior needs official confirmation:
 
 - Getting started: https://docs.openclaw.ai/start/getting-started
 - Latest release: https://github.com/openclaw/openclaw/releases/latest
+- Release v2026.3.11: https://github.com/openclaw/openclaw/releases/tag/v2026.3.11
 - Release v2026.2.26: https://github.com/openclaw/openclaw/releases/tag/v2026.2.26
 - Release v2026.2.25: https://github.com/openclaw/openclaw/releases/tag/v2026.2.25
 - Release v2026.2.19: https://github.com/openclaw/openclaw/releases/tag/v2026.2.19
 
 ## Feature highlights (new features only)
+
+### v2026.3.11 (2026-03-12)
+
+- **Security / Gateway**: Browser-originated WebSocket connections now enforce origin validation even in `trusted-proxy` mode. This closes a real admin-scope hijack path and makes upgrading important for any exposed gateway.
+- **Cron / doctor migration**: Isolated cron delivery is tightened and legacy cron storage now needs `openclaw doctor --fix` migration. This is a breaking operator-facing change and matters directly for existing `~/.openclaw/cron/jobs.json` installs.
+- **ACP session resume**: `sessions_spawn` for `runtime: "acp"` now supports `resumeSessionId`, so ACP / ACPX / Codex child sessions can continue an existing conversation instead of always starting from scratch.
+- **Memory / Gemini embeddings**: `memorySearch` adds `gemini-embedding-2-preview` support, configurable output dimensions, automatic reindexing on dimension change, and opt-in multimodal image/audio indexing for `memorySearch.extraPaths`.
+- **Ollama onboarding**: OpenClaw now has first-class Ollama onboarding with Local and Cloud + Local modes, cloud sign-in, curated model suggestions, and smarter local-pull behavior.
+- **OpenCode Go**: Wizard/docs now expose OpenCode Go as a first-class setup path while keeping runtime providers split under the hood.
 
 ### v2026.2.26 (2026-02-27)
 

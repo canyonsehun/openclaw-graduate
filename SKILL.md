@@ -141,15 +141,12 @@ Run this flow when the user asks for "latest version", "what changed", or reques
    - Current vs latest version
    - Whether update was performed
    - New features only (exclude pure bug-fix/security-fix items unless user explicitly asks)
-5. For v2026.2.19 feature highlights, explain usage when relevant:
-   - Apple Watch companion MVP: watch inbox + watch command entry points (requires iOS/Watch app side setup).
-   - iOS wake/reconnect improvements via APNs: reduces invoke failures while iOS app is backgrounded.
-   - Paired-device hygiene commands:
-     - `openclaw devices list`
-     - `openclaw devices remove <id>`
-     - `openclaw devices clear --yes [--pending]`
-   - APNs registration/signing options: set `apns.{bundle_id,team_id,key_id}` in OpenClaw config when iOS push is needed.
-   - APNs push-test pipeline: use to validate iOS push before relying on wake/reconnect.
+5. For v2026.3.11 feature highlights, explain usage when relevant:
+   - Security/Gateway: origin validation now applies to all browser-originated WebSocket connections, including `trusted-proxy` mode; upgrades matter for any exposed gateway.
+   - Cron/doctor: legacy cron storage now needs `openclaw doctor --fix`; isolated cron delivery is stricter and older notify/fallback behavior may need migration.
+   - ACP: `sessions_spawn` with `runtime: "acp"` now supports `resumeSessionId`, allowing resumed ACPX/Codex conversations.
+   - Memory: `memorySearch` now supports `gemini-embedding-2-preview`, configurable dimensions, automatic reindexing, and opt-in multimodal indexing for image/audio paths.
+   - Ollama onboarding: new first-class Local / Cloud + Local setup path with curated model suggestions.
 
 ## Input contract before creating a Telegram bot
 

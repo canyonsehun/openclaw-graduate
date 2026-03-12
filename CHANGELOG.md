@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.5.0 (2026-03-12)
+
+### 更新
+- `references/official.md` 同步到 OpenClaw `v2026.3.11`
+- 补充本次最值得操作层关注的变化：
+  - Gateway/WebSocket origin 安全修复
+  - `openclaw doctor --fix` 对 legacy cron storage 的迁移要求
+  - ACP `resumeSessionId`
+  - `memorySearch` 对 `gemini-embedding-2-preview` 与多模态索引的支持
+  - Ollama 新 onboarding 流程
+
+### 调整
+- 更新 `SKILL.md` 中 release-check 段落的版本示例，从 `v2026.2.19` 改为 `v2026.3.11`
+
 ## v1.4.0 (2026-03-11)
 
 ### 新增
