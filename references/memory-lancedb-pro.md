@@ -1,6 +1,8 @@
 # memory-lancedb-pro 插件
 
-**GitHub**: https://github.com/win4r/memory-lancedb-pro
+**GitHub**: https://github.com/CortexReach/memory-lancedb-pro
+**历史仓库**: https://github.com/win4r/memory-lancedb-pro
+**当前 GitHub 作者 / 维护者**: `CortexReach`
 **本地路径**: `~/.openclaw/plugins/memory-lancedb-pro`
 **当前版本**: 1.1.0-beta.6（通过每日定时任务自动跟踪更新）
 
@@ -24,7 +26,7 @@ OpenClaw 的增强型长期记忆插件，替代内置 `memory-lancedb`。核心
 插件通过 git clone 直接加载（非 `openclaw plugins install`），然后在 `openclaw.json` 中 load path 方式注册：
 
 ```bash
-git clone https://github.com/win4r/memory-lancedb-pro ~/.openclaw/plugins/memory-lancedb-pro
+git clone https://github.com/CortexReach/memory-lancedb-pro ~/.openclaw/plugins/memory-lancedb-pro
 cd ~/.openclaw/plugins/memory-lancedb-pro && npm install
 ```
 

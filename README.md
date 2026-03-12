@@ -1,33 +1,125 @@
-# openclaw-graduate
+<div align="center">
 
-> 🌐 语言切换：**中文（当前）** | [English](./README.en.md)
+# 🦞 openclaw-graduate · OpenClaw 运维 Skill 仓库
 
-这个仓库保存当前在本地使用的 `openclaw` skill，聚焦 OpenClaw 的安装、升级、模型 provider 配置、channels、multi-agent、relay / codex / Claude 切换、远端 Codespaces 部署与常见故障排查。
+**一个面向真实环境的 OpenClaw 配置、部署、排障与运营手册仓库**
 
-## 仓库内容
+*把本地 macOS、远端 Codespaces、Telegram Bot、Claude Code / Codex / Relay / Jina / memory-lancedb-pro 的实战经验，整理成可直接执行的 skill 与参考文档。*
 
-- `SKILL.md`：主技能说明
-- `references/`：分主题操作参考
-- `scripts/`：配套脚本
-- `assets/`：技能附带素材
+[![OpenClaw Skill](https://img.shields.io/badge/OpenClaw-Skill-blue)](https://github.com/canyonsehun/openclaw-graduate)
+[![Operations](https://img.shields.io/badge/Focus-Operations%20%26%20Troubleshooting-6f42c1)](https://github.com/canyonsehun/openclaw-graduate)
+[![Codespaces](https://img.shields.io/badge/Remote-Codespaces-24292f)](https://github.com/features/codespaces)
+[![Telegram](https://img.shields.io/badge/Channel-Telegram-26A5E4)](https://telegram.org/)
+[![Claude Code](https://img.shields.io/badge/Tool-Claude%20Code-D97706)](https://www.anthropic.com/claude-code)
+[![Codex](https://img.shields.io/badge/Tool-Codex-0F766E)](https://openai.com/)
 
-## 具体功能
+**中文（当前）** | [English](./README.en.md)
 
-- **安装与修复**：覆盖 `openclaw setup`、`openclaw doctor --repair`、`gateway start/restart/status`、`channels status`、`agents list` 等基础运维流程
-- **模型与厂商切换**：整理 `codex`、`anthropic / Claude`、OpenAI-compatible relay 等 provider 的接法、默认模型配置、fallback 规则与 smoke test 方法
-- **Bot 与频道接入**：支持 Telegram Bot 接入、agent 绑定、默认模型指定、多 bot 路由，以及 `/model` 可选目录的维护
-- **远端部署**：包含 GitHub Codespaces / github.dev 的启动方式、环境变量注入、`~/.secrets/openclaw.env` 约定、远端 Gateway 启动脚本思路
-- **插件与记忆排查**：覆盖 `memory-lancedb-pro` 注册、Jina embedding 探针、插件加载异常、session 锁等常见问题
-- **Claude Code 联动**：记录远端 Claude Code 可用时如何作为 OpenClaw 的后备执行入口，以及最小冒烟验证方法
-- **诊断与回归验证**：给出 403 / 429、Cloudflare challenge、错模型、不回复、配置写死、JSON 配错、路由异常等问题的排查路径
+</div>
 
-## 重要亮点
+---
 
-- **来自真实环境**：不是纯文档摘抄，而是把本地 macOS、远端 Codespaces、真实 provider 与 bot 配置踩坑后的可用方案沉淀下来
-- **结论可直接执行**：尽量给出可落地命令、配置路径、验证方式，不写空泛说明
-- **本地与远端分开讲**：明确区分本地可用、远端受限、Cloudflare 拦截、Claude fallback 等不同场景，减少误判
-- **聚焦运维与排障**：重点放在“为什么不能用”“现在该改哪里”“怎么验证已经修好”，而不是泛泛介绍 OpenClaw
-- **附带辅助脚本**：仓库里保留了一键接入 Telegram Bot、同步 relay 模型目录等脚本，方便直接复用
+## ✨ 为什么有这个仓库
+
+OpenClaw 官方文档很全，但很多内容偏通用。这个仓库更像一份 **“已经在真实机器上踩过坑、确认能跑通”** 的运维手册：  
+它记录的是我们本地与远端环境里，真正用过、改过、验证过的流程和结论。
+
+| 场景 | 这个仓库提供什么 |
+|---|---|
+| 🛠️ **初次安装 / 修复** | `openclaw setup`、`doctor --repair`、Gateway 启停、基本健康检查 |
+| 🤖 **多 Bot / 多 Agent 路由** | Telegram Bot 接入、agent 绑定、默认模型、`/model` 目录维护 |
+| 🧠 **模型切换** | `codex`、`anthropic / Claude`、relay、OpenAI-compatible provider 的接法与验证 |
+| ☁️ **远端部署** | GitHub Codespaces / github.dev 的启动方式、环境变量、远端 Gateway 习惯用法 |
+| 🔍 **排障** | 403 / 429、Cloudflare challenge、错模型、不回复、JSON 写错、session 锁、插件异常 |
+| 🧩 **记忆插件联动** | `memory-lancedb-pro` 的安装、配置、更新检查与运行诊断 |
+
+---
+
+## 🚀 这个仓库能帮你什么
+
+- **安装与修复**：覆盖 `openclaw setup`、`openclaw doctor --repair`、`gateway start/restart/status`、`channels status`、`agents list`
+- **模型与厂商切换**：整理 `codex`、`anthropic / Claude`、OpenAI-compatible relay 的接法、默认模型、fallback 与 smoke test
+- **Bot 与频道接入**：支持 Telegram Bot 接入、agent 绑定、默认模型指定、多 bot 路由和 `/model` 可选目录维护
+- **远端部署**：包含 GitHub Codespaces / github.dev 的启动方式、`~/.secrets/openclaw.env` 约定与远端 Gateway 启动思路
+- **插件与记忆排查**：覆盖 `memory-lancedb-pro` 注册、Jina embedding 探针、插件加载异常、session 锁等问题
+- **Claude Code 联动**：记录 Claude Code 可用时如何作为 OpenClaw 的后备执行入口，以及最小冒烟验证方法
+- **诊断与回归验证**：给出 403 / 429、Cloudflare challenge、错模型、不回复、配置写死、JSON 配错、路由异常等排查路径
+
+---
+
+## 🧭 快速导航
+
+| 文档 | 用途 |
+|---|---|
+| `SKILL.md` | 主技能说明，适合直接给 Agent 执行 |
+| `references/official.md` | OpenClaw 官方行为、版本更新、命令参考 |
+| `references/providers.md` | `codex` / Claude / 其他 provider 配置方法 |
+| `references/channels.md` | Telegram / WhatsApp / Slack 等 channel 配置 |
+| `references/multi_agent.md` | 多 Agent、绑定与路由说明 |
+| `references/memory-lancedb-pro.md` | `memory-lancedb-pro` 插件配置、工具、cron 更新任务与诊断 |
+| `scripts/provision_telegram_bot.py` | 一键接入 Telegram Bot |
+| `scripts/sync_relay_models.py` | 同步 relay 模型目录 |
+
+---
+
+## 🧠 memory-lancedb-pro 插件来源与作者
+
+这个仓库里收录了 `memory-lancedb-pro` 的集成说明，但 **插件代码本身不属于本仓库**。
+
+- **当前来源仓库**：[`CortexReach/memory-lancedb-pro`](https://github.com/CortexReach/memory-lancedb-pro)
+- **历史公开仓库路径**：[`win4r/memory-lancedb-pro`](https://github.com/win4r/memory-lancedb-pro)（现已迁移/跳转）
+- **当前 GitHub 作者 / 维护者**：`CortexReach`
+- **我们在这里维护的内容**：OpenClaw 侧的安装、接入、更新检查、排障和使用说明
+
+如果你要改插件源码，应回到上游仓库处理；本仓库负责的是 **“怎么把它在 OpenClaw 里用好”**。
+
+---
+
+## 🌟 这个仓库的亮点
+
+- **来自真实环境**：不是纯文档摘抄，而是本地 macOS、远端 Codespaces、真实 provider 与 bot 配置踩坑后的可用方案
+- **结论可直接执行**：尽量给出命令、配置路径、验证方式和失败信号，不写空泛说明
+- **本地与远端分开讲**：明确区分本地可用、远端受限、Cloudflare 拦截、Claude fallback 等不同场景
+- **聚焦运维与排障**：重点放在“为什么不能用”“该改哪里”“怎么确认修好”
+- **保留可复用脚本**：仓库里有 Telegram Bot 接入脚本和 relay 模型同步脚本，适合直接复用
+
+---
+
+## 📦 仓库结构
+
+| 路径 | 作用 |
+|---|---|
+| `SKILL.md` | 主技能说明 |
+| `references/` | 分主题操作参考 |
+| `scripts/` | 辅助脚本 |
+| `CHANGELOG.md` | 仓库自身更新记录 |
+
+---
+
+## ⚡ 快速开始
+
+### 1. 直接阅读主 Skill
+
+```bash
+open /Users/shmily/.codex/skills/openclaw/SKILL.md
+```
+
+### 2. 常用验证命令
+
+```bash
+openclaw --version
+openclaw gateway status
+openclaw channels status
+openclaw agents list --json
+```
+
+### 3. 无 channel 的最小冒烟测试
+
+```bash
+openclaw agent --local --agent main --message "reply only: ok" --json
+```
+
+---
 
 ## 当前范围
 
@@ -47,7 +139,9 @@
 
 ## 🧠 memory-lancedb-pro 插件使用指南
 
-**GitHub**：[win4r/memory-lancedb-pro](https://github.com/win4r/memory-lancedb-pro)
+**GitHub**：[`CortexReach/memory-lancedb-pro`](https://github.com/CortexReach/memory-lancedb-pro)  
+**历史来源**：[`win4r/memory-lancedb-pro`](https://github.com/win4r/memory-lancedb-pro)  
+**当前 GitHub 作者 / 维护者**：`CortexReach`
 
 ### 插件是做什么的
 
@@ -112,11 +206,11 @@ OpenClaw 自带一个基础记忆插件 `memory-lancedb`，只支持向量检索
 
 ```bash
 # macOS / Linux
-git clone https://github.com/win4r/memory-lancedb-pro ~/.openclaw/plugins/memory-lancedb-pro
+git clone https://github.com/CortexReach/memory-lancedb-pro ~/.openclaw/plugins/memory-lancedb-pro
 cd ~/.openclaw/plugins/memory-lancedb-pro && npm install
 
 # Windows（PowerShell）
-git clone https://github.com/win4r/memory-lancedb-pro $env:USERPROFILE\.openclaw\plugins\memory-lancedb-pro
+git clone https://github.com/CortexReach/memory-lancedb-pro $env:USERPROFILE\.openclaw\plugins\memory-lancedb-pro
 cd $env:USERPROFILE\.openclaw\plugins\memory-lancedb-pro && npm install
 ```
 
