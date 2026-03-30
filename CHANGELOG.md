@@ -36,6 +36,7 @@
 - 快速导航新增 `references/lossless-claw.md`
 - 项目介绍补充 `lossless-claw` 的作用、功能、作者与仓库定位
 - 插件来源与作者章节扩展为 `memory-lancedb-pro + lossless-claw`
+- 新增 `lossless-claw` 的 README 使用指南
 
 ## v1.6.0 (2026-03-12)
 
