@@ -1,5 +1,42 @@
 # Changelog
 
+## v1.7.0 (2026-03-30)
+
+### 更新：memory-lancedb-pro 说明同步到 v1.1.0-beta.10
+
+- 同步上游来源与作者：
+  - 仓库：`CortexReach/memory-lancedb-pro`
+  - 维护者：`CortexReach`
+- 同步这次实际踩坑后的配置经验：
+  - `embedding` 和插件内部 `llm` 不能共用同一条 `Jina` 上游
+  - 更稳的做法是 `embedding` 继续走 `Jina`，`llm` 单独指向当前 OpenClaw 使用中的 `codex` / OpenAI-compatible 上游
+  - 当前环境已验证：`llm.model = gpt-5.3-codex`
+- 补充 legacy memories 迁移经验：
+  - `27` 条旧格式记忆已成功升级
+  - 升级完成后 `legacy = 0`
+
+### 新增：lossless-claw 上下文引擎参考文档
+
+- 新增 `references/lossless-claw.md`
+- 同步上游来源与作者：
+  - 仓库：`Martian-Engineering/lossless-claw`
+  - 包名：`@martian-engineering/lossless-claw`
+  - 维护者：`Martian-Engineering`
+- 明确插件定位：
+  - 它是 `LCM` 上下文引擎
+  - 负责长对话里的旧消息压缩、保留、展开与早期细节找回
+  - 它不是长期记忆插件，不替代 `memory-lancedb-pro`
+- 同步当前环境的配置经验：
+  - 推荐 `plugins.slots.contextEngine = lossless-claw`
+  - 推荐与 `memory-lancedb-pro` 并用
+  - 当前已验证 `summaryModel = codex/gpt-5.2`
+
+### README 同步
+
+- 快速导航新增 `references/lossless-claw.md`
+- 项目介绍补充 `lossless-claw` 的作用、功能、作者与仓库定位
+- 插件来源与作者章节扩展为 `memory-lancedb-pro + lossless-claw`
+
 ## v1.6.0 (2026-03-12)
 
 ### 新增：经验提炼 bot / skill distill bot 工作流

@@ -21,6 +21,7 @@ Use this skill to build and maintain a stable multi-bot OpenClaw setup, especial
 | `references/providers.md` | Model provider setup (Anthropic, OpenAI, Ollama, 20+ providers) |
 | `references/security.md` | Auth, access control, hardening baseline, secrets, incident response |
 | `references/memory-lancedb-pro.md` | memory-lancedb-pro 插件：GitHub 地址、安装方式、完整配置项、可用工具、每日自动更新 cron 任务、诊断方法 |
+| `references/lossless-claw.md` | lossless-claw 插件：长对话上下文管理、LCM 工具、与记忆插件的分工、安装与推荐配置 |
 | `references/experience-distill-bot.md` | 经验提炼 bot / skill distill bot 模式：如何把主对话里的稳定经验沉淀为 skill 草稿或更新提案 |
 
 ## Workflow decision
@@ -30,9 +31,10 @@ Use this skill to build and maintain a stable multi-bot OpenClaw setup, especial
 3. Perform bot onboarding when user provides bot name/username/token/default model.
 4. Perform experience-distill bot design when user wants to turn recurring chat knowledge into a dedicated summary / distill / skill-maintenance bot workflow.
 5. Perform relay model sync when user asks to add/remove `/model relay` options.
-6. Perform relay capability checks when user asks whether image models, auto account/model behavior, or LAN proxy mode work.
-7. Perform verification/troubleshooting when user reports wrong model, no reply, 403/429, or routing confusion.
-8. Perform execution-integrity checks when user reports "说了已完成但没做" or multi-step runs stop halfway.
+6. Perform context-engine checks when user asks about long conversations forgetting early details, `lossless-claw`, `LCM`, or context compaction behavior.
+7. Perform relay capability checks when user asks whether image models, auto account/model behavior, or LAN proxy mode work.
+8. Perform verification/troubleshooting when user reports wrong model, no reply, 403/429, or routing confusion.
+9. Perform execution-integrity checks when user reports "说了已完成但没做" or multi-step runs stop halfway.
 
 ## Install and bootstrap
 

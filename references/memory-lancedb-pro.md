@@ -3,6 +3,7 @@
 **GitHub**: https://github.com/CortexReach/memory-lancedb-pro
 **历史公开路径**: https://github.com/win4r/memory-lancedb-pro
 **当前 GitHub 作者 / 维护者**: `CortexReach`
+**最新已验证 release**: `v1.1.0-beta.10`（2026-03-23）
 **推荐本地路径**: `~/.openclaw/plugins/memory-lancedb-pro`
 
 ## 简介
@@ -19,6 +20,62 @@ OpenClaw 的增强型长期记忆插件，替代内置 `memory-lancedb`。核心
 | 长度归一化 / 噪声过滤 | ❌ | ✅ |
 | MMR 多样性选择 | ❌ | ✅ |
 | 多 Scope 隔离 | ❌ | ✅ |
+
+## 当前环境里验证过的升级 / 配置经验
+
+### 1. 已验证版本
+
+当前环境已完成从 `v1.1.0-beta.9` 升级到 `v1.1.0-beta.10`。
+这个版本已经覆盖 `OpenClaw 2026.3+` 的新 hook 链路，属于当前更稳的 release。
+
+### 2. Embedding 和 LLM 不要混用一条上游
+
+这是这次实际踩过的坑：
+
+- `embedding` 可以继续走 `Jina`
+- 但插件内部 `llm`（smart extraction / enrichment）不能默认继承到 `Jina embedding` 这条链路
+
+更稳的做法是：
+
+- `embedding.*` 单独走 `Jina`
+- `llm.*` 单独指定到当前 OpenClaw 正在使用的 `codex` / OpenAI-compatible 上游
+
+否则容易出现：
+
+- 把非 embedding 模型打到 `Jina`
+- `400` / `429`
+- enrichment 失败后只能 fallback simple
+
+### 3. 当前环境推荐做法
+
+当前环境里已验证可用的方向是：
+
+- `embedding.model = jina-embeddings-v5-text-small`
+- `llm.model = gpt-5.3-codex`
+- `llm.baseURL` / `llm.apiKey` 直接跟当前 OpenClaw 的 `codex` 提供商走
+
+这样可以把：
+
+- 记忆向量化
+- smart extraction
+- 长期记忆召回
+
+三条链路拆开，各走合适的上游。
+
+### 4. legacy memories 可以升级
+
+如果日志提示有旧格式记忆，可以直接执行：
+
+```bash
+openclaw memory-pro upgrade
+```
+
+当前环境已经验证过：
+
+- `27` 条 legacy memories 可成功迁移到新格式
+- 迁移完成后 `legacy = 0`
+
+这属于数据格式升级，不是功能报错。
 
 ## 安装方式
 
