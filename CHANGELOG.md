@@ -1,5 +1,58 @@
 # Changelog
 
+## v1.8.0 (2026-04-04)
+
+### 更新：OpenClaw 官方版本说明同步到 v2026.4.2
+
+- 同步 `references/official.md`
+- 补充当前最值得操作者关注的变化：
+  - `Task Flow` / flow state 恢复
+  - `before_agent_reply` 新 hook
+  - `agents.defaults.compaction.model` 与 `notifyUser` 相关配置变化
+  - provider transport hardening
+  - loopback / exec 回归修复
+
+### 更新：lossless-claw 说明同步到 v0.6.1
+
+- 当前环境已升级并验证到 `v0.6.1`
+- README 与 `references/lossless-claw.md` 同步补充升级命令：
+  - `openclaw plugins update lossless-claw`
+- `summaryModel` 推荐值从 `codex/gpt-5.2` 调整为当前环境更稳定的 `codex/gpt-5.3-codex`
+- 补充 `v0.6.1` 适合优先排查的场景：
+  - 长会话压缩后历史重复
+  - 上下文重放不干净
+  - heartbeat / ACK 污染 compaction
+
+### 新增：provider / network error 专项排障文档
+
+- 新增 `references/provider-network-errors.md`
+- 明确这类问题的诊断顺序：
+  - 先分清 `openai-codex-responses` 是否被错用到普通 `/v1` relay
+  - 再区分真实网络故障、auth 问题、WAF 问题、API adapter 误配
+- 将 `LLM request failed: network connection error` 从“泛泛网络报错”收敛成可执行的判定树
+
+### 新增：skill 自检脚本与维护闭环
+
+- 新增 `scripts/audit_skill.py`
+- 自检覆盖：
+  - 引用文件存在
+  - 顶层 `references/*.md` 可从 `SKILL.md` 发现
+  - UTF-8 / 无 BOM / 无异常控制字符
+  - 无个人路径写死
+  - 无旧残留词
+- `SKILL.md` 同步加入“更新 skill 后必须先跑自检”的维护规则
+
+### 收口：主 skill 与 references 结构整理
+
+- 主 `SKILL.md` 改成总章结构：
+  - `Core operator workflows`
+  - `Remote and provider-specific diagnosis`
+  - `Verification, maintenance, and failure handling`
+- 多份 reference 增加“用它干嘛 / 不用它干嘛”的边界声明，减少串台
+- README 快速导航补充：
+  - `references/provider-network-errors.md`
+  - `scripts/audit_skill.py`
+
 ## v1.7.0 (2026-03-30)
 
 ### 更新：memory-lancedb-pro 说明同步到 v1.1.0-beta.10
@@ -29,7 +82,7 @@
 - 同步当前环境的配置经验：
   - 推荐 `plugins.slots.contextEngine = lossless-claw`
   - 推荐与 `memory-lancedb-pro` 并用
-  - 当前已验证 `summaryModel = codex/gpt-5.2`
+  - 当前已验证 `summaryModel = codex/gpt-5.3-codex`
 
 ### README 同步
 
